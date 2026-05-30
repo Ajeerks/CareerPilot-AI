@@ -1,0 +1,24 @@
+We are looking for a Frontend Developer to build responsive web applications.
+
+Requirements:
+- HTML
+- CSS
+- JavaScript
+- React
+- TypeScript
+- Next.js
+- Tailwind CSS
+- Redux
+- Responsive Design
+- UI/UX
+
+Responsibilities:
+- Build responsive interfaces
+- Improve user experience
+- Develop reusable components
+- Optimize frontend performance
+- Integrate APIs
+
+Preferred:
+- Figma
+- Framer Motion

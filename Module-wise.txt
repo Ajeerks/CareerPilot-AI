@@ -1,0 +1,385 @@
+CareerPilot AI — Final System Architecture
+                    ┌────────────────────┐
+                    │    Frontend UI     │
+                    │ React / Next.js    │
+                    └─────────┬──────────┘
+                              │
+                        REST / WebSocket
+                              │
+                    ┌─────────▼──────────┐
+                    │   API Gateway      │
+                    │ FastAPI Backend    │
+                    └─────────┬──────────┘
+                              │
+     ┌────────────────────────┼────────────────────────┐
+     │                        │                        │
+     ▼                        ▼                        ▼
+ Resume Services       Interview Engine        Career AI Engine
+     │                        │                        │
+     ▼                        ▼                        ▼
+ NLP Pipeline           LLM Conversation         Recommendation System
+     │                        │                        │
+     └────────────────────────┼────────────────────────┘
+                              ▼
+                      Vector Database
+                     (FAISS/ChromaDB)
+                              │
+                              ▼
+                        PostgreSQL
+BEST MODULE STRUCTURE
+
+This is how you should divide the project.
+
+MODULE 1 — Authentication System
+Features
+Login/signup
+JWT authentication
+Google OAuth
+User profile
+Database Tables
+users
+sessions
+profiles
+Tech
+FastAPI Auth
+JWT
+PostgreSQL
+MODULE 2 — Resume Builder
+
+This is one of the BEST starter modules.
+
+Workflow
+User Input
+   ↓
+Structured Resume JSON
+   ↓
+AI Resume Generator
+   ↓
+Resume Formatter
+   ↓
+PDF Export
+Backend Components
+Resume Parser
+
+Converts form input into structured JSON.
+
+AI Resume Writer
+
+LLM improves:
+
+wording
+impact
+ATS optimization
+PDF Generator
+
+Generate downloadable resumes.
+
+Suggested Stack
+Jinja2 templates
+WeasyPrint
+ReportLab
+MODULE 3 — Resume Analyzer
+
+This becomes your NLP engine.
+
+Pipeline
+Resume Upload
+     ↓
+PDF Text Extraction
+     ↓
+NLP Processing
+     ↓
+Skill Extraction
+     ↓
+ATS Scoring
+     ↓
+Feedback Generator
+Resume Analyzer Submodules
+A. PDF Processing
+
+Libraries:
+
+PyMuPDF
+pdfplumber
+B. NLP Skill Extraction
+
+Use:
+
+spaCy
+sentence-transformers
+
+Extract:
+
+skills
+projects
+tools
+education
+C. ATS Score Engine
+
+Factors:
+
+keyword match
+formatting
+section quality
+readability
+D. Grammar Analyzer
+
+Use:
+
+LanguageTool
+Gramformer
+MODULE 4 — Skill Gap Analyzer
+
+This is VERY important.
+
+Workflow
+Resume Skills
+      ↓
+Target Job Skills
+      ↓
+Skill Comparison Engine
+      ↓
+Missing Skills Detection
+      ↓
+Learning Recommendations
+ML Concepts
+cosine similarity
+embeddings
+semantic matching
+Example
+User Skills:
+Python, Pandas
+
+Target Role:
+Data Scientist
+
+Missing:
+SQL, Statistics, ML
+MODULE 5 — AI Career Guidance Engine
+
+This is your LLM brain.
+
+Features
+career roadmap generation
+project suggestions
+certification guidance
+learning path generation
+Recommended Architecture
+User Query
+    ↓
+Prompt Builder
+    ↓
+LLM
+    ↓
+Response Formatter
+IMPORTANT — Use RAG
+
+Instead of only prompting.
+
+Why?
+
+Without RAG:
+
+hallucinations
+generic advice
+
+With RAG:
+
+grounded responses
+custom career guidance
+Store Knowledge Base
+
+You can store:
+
+interview questions
+learning resources
+role requirements
+roadmap data
+
+Inside:
+
+ChromaDB
+FAISS
+MODULE 6 — AI Interview Engine
+
+This can become your most impressive module.
+
+Interview Architecture
+Role Selection
+      ↓
+Question Generator
+      ↓
+Conversation Memory
+      ↓
+User Response
+      ↓
+Evaluation Engine
+      ↓
+Feedback Generator
+Interview Question Sources
+
+You can generate from:
+
+LLM
+curated datasets
+GitHub interview repositories
+Types of Interviews
+Technical
+coding
+ML
+SQL
+Python
+HR
+teamwork
+strengths
+weaknesses
+Project-Based
+
+This is VERY unique.
+
+Example:
+
+Explain your Alzheimer’s detection system architecture.
+
+This makes interviews personalized.
+
+MODULE 7 — Interview Feedback Analyzer
+Evaluate
+Technical Accuracy
+correct concepts
+completeness
+Communication
+structure
+clarity
+confidence
+AI Score
+
+Generate:
+
+Confidence: 7/10
+Technical Depth: 8/10
+Communication: 6/10
+MODULE 8 — LinkedIn Optimizer
+
+This feature is highly practical.
+
+Features
+
+Improve:
+
+headline
+About section
+project descriptions
+Workflow
+LinkedIn Content
+      ↓
+LLM Optimization
+      ↓
+Professional Rewrite
+MODULE 9 — Recommendation Engine
+
+This adds Data Science depth.
+
+Recommends
+jobs
+courses
+projects
+interview topics
+Algorithms
+
+You can use:
+
+content-based filtering
+embedding similarity
+hybrid recommender systems
+MODULE 10 — Dashboard & Analytics
+Track
+ATS score progress
+interview history
+skill improvements
+weaknesses
+
+This makes the product feel real.
+
+ADVANCED AI MODULES
+
+These are later-stage features.
+
+MODULE 11 — Voice Interview System
+Stack
+Whisper
+SpeechRecognition
+pyttsx3
+Flow
+Speech Input
+     ↓
+Speech-to-Text
+     ↓
+AI Evaluation
+     ↓
+Voice Feedback
+MODULE 12 — Emotion Detection
+Detect
+nervousness
+confidence
+hesitation
+Stack
+OpenCV
+MediaPipe
+DeepFace
+MODULE 13 — Real Recruiter Mode
+
+This becomes very impressive.
+
+Features
+interrupting questions
+pressure interviews
+follow-up questions
+deep project questioning
+
+This simulates real interviews.
+
+DATABASE DESIGN
+Main Tables
+Users
+id
+name
+email
+role
+skills
+career_goal
+Resumes
+id
+user_id
+resume_text
+ats_score
+created_at
+Interviews
+id
+user_id
+role
+score
+feedback
+Skill Gaps
+id
+user_id
+missing_skill
+priority
+BEST AI MODELS
+Embedding Models
+
+Use:
+
+all-MiniLM-L6-v2
+bge-small-en
+LLM Models
+Free/Open Models
+Llama 3
+Mistral
+Gemma
+
+Available on:
+
+GroqCloud
+OpenRouter
+Hugging Face

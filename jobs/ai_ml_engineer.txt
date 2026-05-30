@@ -1,0 +1,26 @@
+We are looking for an AI/ML Engineer with experience in deep learning and NLP.
+
+Requirements:
+- Python
+- Machine Learning
+- Deep Learning
+- TensorFlow
+- PyTorch
+- NLP
+- OpenCV
+- Pandas
+- NumPy
+- Model Deployment
+- Scikit-learn
+
+Responsibilities:
+- Train AI models
+- Build NLP systems
+- Develop computer vision applications
+- Optimize deep learning pipelines
+- Deploy ML models
+
+Preferred:
+- Hugging Face
+- LangChain
+- Vector Databases

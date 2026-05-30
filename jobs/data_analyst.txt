@@ -1,0 +1,23 @@
+We are hiring a Data Analyst with strong reporting and analytics skills.
+
+Requirements:
+- Excel
+- SQL
+- Python
+- Power BI
+- Tableau
+- Data Visualization
+- Data Cleaning
+- Pandas
+- Statistics
+
+Responsibilities:
+- Analyze business data
+- Create reports and dashboards
+- Perform trend analysis
+- Generate insights
+- Support decision making
+
+Preferred:
+- Machine Learning
+- Forecasting

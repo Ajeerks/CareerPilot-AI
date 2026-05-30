@@ -1,0 +1,28 @@
+We are hiring a Data Scientist with strong analytical and machine learning skills.
+
+Requirements:
+- Python
+- SQL
+- Machine Learning
+- Deep Learning
+- Pandas
+- NumPy
+- Scikit-learn
+- TensorFlow
+- Data Visualization
+- Statistics
+- Data Cleaning
+- NLP
+
+Responsibilities:
+- Build machine learning models
+- Analyze structured and unstructured data
+- Create predictive analytics systems
+- Perform feature engineering
+- Work with large datasets
+- Build dashboards and reports
+
+Preferred:
+- Power BI
+- Tableau
+- Cloud platforms

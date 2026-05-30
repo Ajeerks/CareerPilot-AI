@@ -1,0 +1,36 @@
+python
+sql
+tensorflow
+keras
+pandas
+numpy
+scikit-learn
+opencv
+nlp
+machine learning
+deep learning
+react
+javascript
+typescript
+docker
+kubernetes
+aws
+fastapi
+django
+flask
+mongodb
+postgresql
+power bi
+tableau
+excel
+data visualization
+statistics
+data cleaning
+feature engineering
+computer vision
+natural language processing
+api
+rest api
+node.js
+next.js
+tailwind css

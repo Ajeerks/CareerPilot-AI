@@ -1,0 +1,25 @@
+We are hiring a Backend Developer with API development experience.
+
+Requirements:
+- Python
+- FastAPI
+- Django
+- Flask
+- REST API
+- SQL
+- MongoDB
+- Authentication
+- JWT
+- Backend Architecture
+
+Responsibilities:
+- Develop backend systems
+- Build REST APIs
+- Manage databases
+- Implement authentication
+- Optimize server performance
+
+Preferred:
+- Docker
+- Kubernetes
+- AWS

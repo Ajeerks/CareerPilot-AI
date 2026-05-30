@@ -1,0 +1,7 @@
+1) D:
+
+2) cd "D:\self\CareerPilot AI"
+
+3) careerpilot\Scripts\activate
+
+4) uvicorn main:app --reload
