@@ -1,4 +1,5 @@
 from market_skills import get_market_skills
+from semantic_matcher import extract_resume_skills_v2
 from fastapi import FastAPI, UploadFile, File, Form
 import fitz
 import re
@@ -35,25 +36,10 @@ def extract_resume_skills(
     resume_text,
     required_skills
 ):
-
-    resume_text = clean_text(
-        resume_text
+    return extract_resume_skills_v2(
+        resume_text,
+        required_skills
     )
-
-    found_skills = []
-
-    for skill in required_skills:
-
-        if skill.lower() in resume_text:
-
-            found_skills.append(
-                skill
-            )
-
-    return list(
-        set(found_skills)
-    )
-
 # ==========================================
 # ATS SCORE
 # ==========================================
