@@ -1,3 +1,6 @@
+from interview_generator import (
+    generate_interview_questions
+)
 from market_skills import get_market_skills
 from semantic_matcher import extract_resume_skills_v2
 from fastapi import FastAPI, UploadFile, File, Form
@@ -106,6 +109,7 @@ async def upload_resume(
 
     field: str = Form(...),
     industry: str = Form(...),
+    experience: str = Form(...),
     file: UploadFile = File(...)
 
 ):
@@ -207,6 +211,12 @@ async def upload_resume(
 
         )
 
+        interview_questions = generate_interview_questions(
+            field,
+            industry,
+            experience
+        )
+
         # ----------------------------------
         # RESPONSE
         # ----------------------------------
@@ -235,7 +245,10 @@ async def upload_resume(
             missing_skills,
 
             "recommendations":
-            recommendations
+            recommendations,
+
+            "interview_questions":
+            interview_questions
 
         }
 
