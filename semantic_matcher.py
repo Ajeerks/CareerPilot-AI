@@ -50,9 +50,9 @@ def semantic_match(
         similarity
     )
 
-    print(
-        f"{skill} -> {score:.3f}"
-    )
+   # print(
+   #     f"{skill} -> {score:.3f}"
+   # )
 
     return score >= threshold
 

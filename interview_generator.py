@@ -22,30 +22,38 @@ client = Groq(
 
 def generate_interview_questions(
 
-    role,
-    industry,
-    experience="Fresher"
+    job_description,
+    experience_type,
+    years_of_experience
 
 ):
 
     prompt = f"""
 
-Generate exactly 10 interview questions for a {experience}
-applying for the role of {role} in the {industry} industry.
+Generate exactly 10 interview questions based on this Job Description.
 
-Focus on the actual job responsibilities,
-industry practices,
-safety procedures,
-technical knowledge,
-and workplace scenarios related to the role.
+Job Description:
 
-Do not interpret the role name literally.
+{job_description}
+
+Candidate Type:
+{experience_type}
+
+Years of Experience:
+{years_of_experience}
 
 Requirements:
 
--5 Technical Questions
--3 HR Questions
--2 Project-Based Questions
+- 5 Technical Questions
+- 3 HR Questions
+- 2 Project/Scenario Questions
+
+Focus on:
+
+- Actual job responsibilities
+- Required skills
+- Industry practices
+- Workplace scenarios
 
 Return only the questions.
 

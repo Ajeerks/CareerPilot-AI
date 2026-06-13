@@ -1,9 +1,11 @@
 from interview_generator import (
     generate_interview_questions
 )
-from market_skills import get_market_skills
-from semantic_matcher import extract_resume_skills_v2
+
 from fastapi import FastAPI, UploadFile, File, Form
+from jd_parser import extract_jd_skills
+from jd_matcher import analyze_resume_against_jd
+
 import fitz
 import re
 
@@ -30,41 +32,6 @@ def clean_text(text):
     )
 
     return text
-
-# ==========================================
-# EXTRACT RESUME SKILLS
-# ==========================================
-
-def extract_resume_skills(
-    resume_text,
-    required_skills
-):
-    return extract_resume_skills_v2(
-        resume_text,
-        required_skills
-    )
-# ==========================================
-# ATS SCORE
-# ==========================================
-
-def calculate_ats_score(
-    found_skills,
-    required_skills
-):
-
-    if len(required_skills) == 0:
-
-        return 0
-
-    score = (
-
-        len(found_skills)
-        /
-        len(required_skills)
-
-    ) * 100
-
-    return round(score)
 
 # ==========================================
 # RECOMMENDATIONS
@@ -107,9 +74,9 @@ def home():
 @app.post("/upload")
 async def upload_resume(
 
-    field: str = Form(...),
-    industry: str = Form(...),
-    experience: str = Form(...),
+    job_description: str = Form(...),
+    experience_type: str = Form(...),
+    years_of_experience: int = Form(0),
     file: UploadFile = File(...)
 
 ):
@@ -117,21 +84,28 @@ async def upload_resume(
     try:
 
         # ----------------------------------
-        # USER INPUT
+        # EXPERIENCE VALIDATION
+        # ----------------------------------
+        experience_type = experience_type.title()
+
+        if experience_type not in ["Fresher", "Experienced"]:
+
+            return {
+                "error":
+                "experience_type must be Fresher or Experienced"
+             }
+
+        if experience_type == "Fresher":
+
+            years_of_experience = 0
+
+        # ----------------------------------
+        # EXTRACT JD SKILLS USING GROQ
         # ----------------------------------
 
-        field = field.lower().strip()
+        required_skills = extract_jd_skills(
 
-        industry = industry.lower().strip()
-
-        # ----------------------------------
-        # GET MARKET SKILLS
-        # ----------------------------------
-
-        required_skills = get_market_skills(
-
-            field,
-            industry
+            job_description
 
         )
 
@@ -140,12 +114,12 @@ async def upload_resume(
             return {
 
                 "error":
-                f"Unable to generate skills for '{field}'"
+                "Unable to extract skills from Job Description"
 
             }
 
         # ----------------------------------
-        # READ PDF
+        # READ RESUME PDF
         # ----------------------------------
 
         contents = await file.read()
@@ -166,40 +140,21 @@ async def upload_resume(
         pdf.close()
 
         # ----------------------------------
-        # MATCHED SKILLS
+        # ATS ANALYSIS
         # ----------------------------------
 
-        found_skills = extract_resume_skills(
+        result = analyze_resume_against_jd(
 
             resume_text,
             required_skills
 
         )
 
-        # ----------------------------------
-        # MISSING SKILLS
-        # ----------------------------------
+        ats_score = result["ats_score"]
 
-        missing_skills = []
+        matched_skills = result["matched_skills"]
 
-        for skill in required_skills:
-
-            if skill not in found_skills:
-
-                missing_skills.append(
-                    skill
-                )
-
-        # ----------------------------------
-        # ATS SCORE
-        # ----------------------------------
-
-        ats_score = calculate_ats_score(
-
-            found_skills,
-            required_skills
-
-        )
+        missing_skills = result["missing_skills"]
 
         # ----------------------------------
         # RECOMMENDATIONS
@@ -211,10 +166,18 @@ async def upload_resume(
 
         )
 
+        # ----------------------------------
+        # INTERVIEW QUESTIONS
+        # ----------------------------------
+
         interview_questions = generate_interview_questions(
-            field,
-            industry,
-            experience
+
+            job_description,
+
+            experience_type,
+
+            years_of_experience
+
         )
 
         # ----------------------------------
@@ -226,11 +189,14 @@ async def upload_resume(
             "filename":
             file.filename,
 
-            "target_field":
-            field,
+            "experience_type":
+            experience_type,
 
-            "industry":
-            industry,
+            "years_of_experience":
+            years_of_experience,
+
+            "required_skills":
+            required_skills,
 
             "ats_score":
             ats_score,
@@ -239,7 +205,7 @@ async def upload_resume(
             len(required_skills),
 
             "matched_skills":
-            found_skills,
+            matched_skills,
 
             "missing_skills":
             missing_skills,
